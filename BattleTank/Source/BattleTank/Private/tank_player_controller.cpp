@@ -2,12 +2,6 @@
 
 #include "tank_player_controller.h"
 
-Atank * Atank_player_controller::get_controlled_tank() const
-{
-	return Cast<Atank>(GetPawn());
-	
-}
-
 void Atank_player_controller::BeginPlay()
 {
 	Super::BeginPlay();
@@ -18,7 +12,21 @@ void Atank_player_controller::BeginPlay()
 	}
 	else 
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Possesing Tank: %s"), *controlled_tank->GetName())
+		UE_LOG(LogTemp, Warning, TEXT("Player possesing Tank: %s"), *controlled_tank->GetName())
 	}
+}
+
+void Atank_player_controller::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	aim_towards_crosshair();
+}
+
+Atank * Atank_player_controller::get_controlled_tank() const
+{
+	return Cast<Atank>(GetPawn());
 	
+}
+
+void Atank_player_controller::aim_towards_crosshair() {
 }
